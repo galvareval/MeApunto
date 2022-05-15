@@ -58,8 +58,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_first_name"
-                android:layout_width="286dp"
-                android:layout_height="43dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:layout_marginBottom="14dp"
                 android:textColorHint="#808080"
@@ -69,6 +69,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_image"
                 app:layout_constraintWidth_percent="0.7">
+
                 <EditText
                     android:id="@+id/et_first_name"
                     android:layout_width="match_parent"
