@@ -8,7 +8,7 @@ $telefono=$_POST['telefono'];
 $descripcion=$_POST['descripcion'];
 $usuario=$_POST['usuario'];
 $update="UPDATE usuario SET  nombre='".$nombre."', apellidos='".$apellidos."', telefono ='".$telefono."',  correo ='".$correo."', descripcion ='".$descripcion."' WHERE correo ='".$usuario."'";
-
+//
 mysqli_query($conn,$update) or die (mysqli_error());
 mysqli_close($conn);
 
