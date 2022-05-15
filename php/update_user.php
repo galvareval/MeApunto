@@ -12,5 +12,4 @@ $update="UPDATE usuario SET  nombre='".$nombre."', apellidos='".$apellidos."', t
 mysqli_query($conn,$update) or die (mysqli_error());
 mysqli_close($conn);
 
-
 ?>
