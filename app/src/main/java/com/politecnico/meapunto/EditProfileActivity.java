@@ -36,8 +36,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
 
         EditText etFirstName, etLastName, etEmail, etContactNo, etDec, etDni, etAddres, et_oPsw, etNpsw;
-        TextView tvTxt_spin_gen, tvTxt_spin_nv, tvTxt_spin_prefer;
-        Spinner sp_gener, sp_nv_juego, sp_preferencia;
+        TextView tvTxt_spin_gen, tvTxt_spin_nv, tvTxt_spin_prefer, tvTxt_spin_activo;
+        Spinner sp_gener, sp_nv_juego, sp_preferencia, sp_activo;
         Button btnUpdate;
 
         String usuario;
@@ -51,6 +51,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayList<String> listaG = new ArrayList<String>();
         ArrayList<String> listaL = new ArrayList<String>();
         ArrayList<String> listaP = new ArrayList<String>();
+        ArrayList<String> listaA = new ArrayList<String>();
 
 
     final int MIN_PASSWORD_LENGTH = 6;
@@ -76,11 +77,12 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         genero = user.getGenero();
         nivel = user.getNivelDeJuego();
         preferencia = user.getPreferencia();
-        //status = user.getActivo();
+        //status = user.getActivo();//Falta get de status
 
         tvTxt_spin_gen.setText(genero);
         tvTxt_spin_nv.setText(nivel);
         tvTxt_spin_prefer.setText(preferencia);
+        //tvTxt_spin_activo.setText(status);// Falta get de status?¿
 
         Log.d("myTag", "genero: "+ genero);
         Log.d("myTag", "preferencia: "+ preferencia);
@@ -136,10 +138,12 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         sp_gener = findViewById(R.id.spiner);
         sp_nv_juego = findViewById(R.id.spiner_nv_juego);
         sp_preferencia = findViewById(R.id.spiner_preferencia);
+        sp_activo = findViewById(R.id.spiner_activo);
 
         tvTxt_spin_gen = findViewById (R.id.txt_spin_gen);
         tvTxt_spin_nv = findViewById (R.id.txt_spin_nv_juego_din);
         tvTxt_spin_prefer = findViewById(R.id.txt_spin_preferencia_din);
+        tvTxt_spin_activo = findViewById(R.id.txt_spin_activo_din);
 
     }
 
