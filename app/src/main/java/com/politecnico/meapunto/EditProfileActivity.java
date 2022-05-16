@@ -254,6 +254,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         String dni = etDni.getText().toString();
         String newPsw = psw;
         String newGen = genero;
+        String newNvJuego = nivel;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,new Response.Listener<String>() {
             @Override
@@ -268,6 +269,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 user.setDNI(dni);
                 user.setContraseña(newPsw);
                 user.setGenero(newGen);
+                user.setNivelDeJuego(newNvJuego);
                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
             }
         },new Response.ErrorListener(){
@@ -284,6 +286,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 Log.d("myTag", "nombre"+ parametros.get("nombre"));
                 parametros.put("apellidos",lastName);
                 parametros.put("correo",email);
+                parametros.put("nivel_juego",newNvJuego);
                 Log.d("myTag", "correo"+ parametros.get("correo"));
                 parametros.put("telefono",contactNo);
                 parametros.put("genero",newGen);
