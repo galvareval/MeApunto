@@ -51,7 +51,6 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayList<String> listaL = new ArrayList<String>();
         ArrayList<String> listaP = new ArrayList<String>();
 
-        Context cont=this;
 
     final int MIN_PASSWORD_LENGTH = 6;
 
@@ -145,8 +144,10 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaG);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_gener.setAdapter(adapter);
-        //p_gener.setSelection(0);
-
+        if(genero.equals("Hombre"))
+            sp_gener.setSelection(0);
+        else
+            sp_gener.setSelection(1);
     }
 
     private void addListaL()
@@ -155,7 +156,24 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayAdapter<String> adapterL = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaL);
         adapterL.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_nv_juego.setAdapter(adapterL);
-        //sp_nv_juego.setSelection(0);
+        switch (nivel)
+        {
+            case "Iniciacion":
+                sp_nv_juego.setSelection(0);
+                break;
+            case "Intermedio":
+                sp_nv_juego.setSelection(1);
+                break;
+            case "Avanzado":
+                sp_nv_juego.setSelection(2);
+                break;
+            case "Competicion":
+                sp_nv_juego.setSelection(3);
+                break;
+            case "Profesional":
+                sp_nv_juego.setSelection(4);
+                break;
+        }
     }
 
     private void addListaP()
@@ -164,13 +182,26 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayAdapter<String> adapterP = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaP);
         adapterP.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_preferencia.setAdapter(adapterP);
-        //sp_preferencia.setSelection(0);
+        switch (preferencia)
+        {
+            case "Mismo genero":
+                sp_preferencia.setSelection(0);
+                break;
+            case "Mixto":
+                sp_preferencia.setSelection(1);
+                break;
+            case "Indiferente":
+                sp_preferencia.setSelection(2);
+                break;
+        }
     }
 
     //
+
+
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        adapterView.getSelectedItem();
+        //adapterView.getSelectedItem();
         switch (adapterView.getId())
         {
 
@@ -179,37 +210,40 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                     if(!genero.equals(adapterView.getSelectedItem().toString()))
                     {
 
-                        //Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProfileActivity.this, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                         genero = adapterView.getSelectedItem().toString();
                         tvTxt_spin_gen.setText(genero);
 
                     }
+                    break;
                 }
-                break;
+
             case R.id.spiner_nv_juego:
                 {
                     if(!nivel.equals(adapterView.getSelectedItem().toString()))
                     {
 
-                        //Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProfileActivity.this, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                         nivel = adapterView.getSelectedItem().toString();
                         tvTxt_spin_nv.setText(nivel);
 
                     }
+                    break;
                 }
-                break;
+
             case R.id.spiner_preferencia:
             {
                 if(!preferencia.equals(adapterView.getSelectedItem().toString()))
                 {
 
-                    //Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfileActivity.this, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                     preferencia = adapterView.getSelectedItem().toString();
                     tvTxt_spin_prefer.setText(preferencia);
 
                 }
+                break;
             }
-            break;
+
             default:
                 break;
         }
