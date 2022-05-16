@@ -37,17 +37,19 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         //uper.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_edit_profile);
         EditText etFirstName, etLastName, etEmail, etContactNo, etDec, etDni, etAddres, et_oPsw, etNpsw;
-        TextView tvTxt_spin_gen, tvTxt_spin_nv;
-        Spinner sp_gener, sp_nv_juego;
+        TextView tvTxt_spin_gen, tvTxt_spin_nv, tvTxt_spin_prefer;
+        Spinner sp_gener, sp_nv_juego, sp_preferencia;
         Button btnUpdate;
         String usuario;
         String psw;
         Usuario user;
         ArrayList<String> listaG = new ArrayList<String>();
         ArrayList<String> listaL = new ArrayList<String>();
+        ArrayList<String> listaP = new ArrayList<String>();
         Context cont=this;
         String genero;
         String nivel;
+        String preferencia;
     final int MIN_PASSWORD_LENGTH = 6;
 
     @Override
@@ -67,21 +69,36 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         etDec.setText(user.getDescripcion());
         etDni.setText(user.getDNI());
         etAddres.setText(user.getDireccion());
+
         genero = user.getGenero();
         nivel = user.getNivelDeJuego();
+        preferencia = user.getPreferencia();
+
         tvTxt_spin_gen.setText(genero);
         tvTxt_spin_nv.setText(nivel);
+        tvTxt_spin_prefer.setText(preferencia);
+
         Log.d("myTag", "genero: "+ genero);
+        Log.d("myTag", "preferencia: "+ preferencia);
         btnUpdate=(Button) findViewById(R.id.bt_register);
+
         listaG.add("Hombre");
         listaG.add("Mujer");
+
         listaL.add("Iniciacion");
         listaL.add("Intermedio");
         listaL.add("Avanzado");
         listaL.add("Competicion");
         listaL.add("Profesional");
+
+        listaP.add("Mismo genero");
+        listaP.add("Mixto");
+        listaP.add("Indiferente");
+
         addListaG();
         addListaL();
+        addListaP();
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,10 +125,14 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         etAddres = findViewById(R.id.et_addres);
         etNpsw = findViewById(R.id.et_nPsw);
         et_oPsw = findViewById(R.id.et_oPsw);
+
         sp_gener = findViewById(R.id.spiner);
         sp_nv_juego = findViewById(R.id.spiner_nv_juego);
+        sp_preferencia = findViewById(R.id.spiner_preferencia);
+
         tvTxt_spin_gen = findViewById (R.id.txt_spin_gen);
         tvTxt_spin_nv = findViewById (R.id.txt_spin_nv_juego_din);
+        tvTxt_spin_prefer = findViewById(R.id.txt_spin_preferencia_din);
         // To show back button in actionbar
         //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
@@ -122,6 +143,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaG);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_gener.setAdapter(adapter);
+        sp_gener.setSelection(0);
+
     }
 
     private void addListaL()
@@ -130,6 +153,14 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayAdapter<String> adapterL = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaL);
         adapterL.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_nv_juego.setAdapter(adapterL);
+    }
+
+    private void addListaP()
+    {
+        sp_preferencia.setOnItemSelectedListener(this);
+        ArrayAdapter<String> adapterP = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaP);
+        adapterP.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_preferencia.setAdapter(adapterP);
     }
 
     //
@@ -161,6 +192,17 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                     }
                 }
                 break;
+            case R.id.spiner_preferencia:
+            {
+                if(!preferencia.equals(adapterView.getSelectedItem().toString()))
+                {
+                    Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                    preferencia = adapterView.getSelectedItem().toString();
+                    tvTxt_spin_prefer.setText(preferencia);
+
+                }
+            }
+            break;
             default:
                 break;
         }
@@ -255,6 +297,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         String newPsw = psw;
         String newGen = genero;
         String newNvJuego = nivel;
+        String newPreferencia = preferencia;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,new Response.Listener<String>() {
             @Override
@@ -270,6 +313,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 user.setContraseña(newPsw);
                 user.setGenero(newGen);
                 user.setNivelDeJuego(newNvJuego);
+                user.setPreferencia(newPreferencia);
                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
             }
         },new Response.ErrorListener(){
@@ -287,7 +331,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 parametros.put("apellidos",lastName);
                 parametros.put("correo",email);
                 parametros.put("nivel_juego",newNvJuego);
+                parametros.put("preferencia",newPreferencia);
                 Log.d("myTag", "correo"+ parametros.get("correo"));
+                Log.d("myTag", "preferenciaphp: "+ parametros.get("preferencia"));
                 parametros.put("telefono",contactNo);
                 parametros.put("genero",newGen);
                 parametros.put("descripcion",Designation);
