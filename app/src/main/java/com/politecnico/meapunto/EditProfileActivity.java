@@ -46,6 +46,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         String genero;
         String nivel;
         String preferencia;
+        String status;
 
         ArrayList<String> listaG = new ArrayList<String>();
         ArrayList<String> listaL = new ArrayList<String>();
@@ -75,6 +76,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         genero = user.getGenero();
         nivel = user.getNivelDeJuego();
         preferencia = user.getPreferencia();
+        //status = user.getActivo();
 
         tvTxt_spin_gen.setText(genero);
         tvTxt_spin_nv.setText(nivel);
@@ -117,6 +119,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
     }
 
+    /**
+     * Inicializar view IDs
+     */
     public void viewInitializations() {
         etFirstName = findViewById(R.id.et_first_name);
         etLastName = findViewById(R.id.et_last_name);
@@ -137,7 +142,10 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         tvTxt_spin_prefer = findViewById(R.id.txt_spin_preferencia_din);
 
     }
-    // spin
+
+    /**
+     * Enlazar la lista de generos como arraylist con su spinner
+     */
     private void addListaG()
     {
         sp_gener.setOnItemSelectedListener(this);
@@ -150,6 +158,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
             sp_gener.setSelection(1);
     }
 
+    /**
+     * Enlazar la lista de niveles como arraylist con su spinner
+     */
     private void addListaL()
     {
         sp_nv_juego.setOnItemSelectedListener(this);
@@ -176,6 +187,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         }
     }
 
+    /**
+     * Enlazar la lista de preferencias como arraylist con su spinner
+     */
     private void addListaP()
     {
         sp_preferencia.setOnItemSelectedListener(this);
@@ -198,7 +212,13 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
     //
 
-
+    /**
+     * Para establecer lo que pasa en el select de cada SPINNER
+     * @param adapterView
+     * @param view
+     * @param i
+     * @param l
+     */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         //adapterView.getSelectedItem();
@@ -255,7 +275,10 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
     }
 
-    // Checking if the input in form is valid
+    /**
+     * Chekear que los campos modificados cumplan las condiciones
+     * @return Resultado del check
+     */
     boolean validateInput() {
         if (etDni.getText().toString().equals("")) {
             etDni.setError("Please Enter DNI");
@@ -313,15 +336,10 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         return true;
     }
 
-    boolean isEmailValid(String email) {
+    public boolean isEmailValid(String email) {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    // Hook Click Event
-
-    public void performEditProfile (View v) {
-         //validateInput();
-    }
 
     /**
      * Método para updatear los datos del usuario
@@ -355,6 +373,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 user.setGenero(newGen);
                 user.setNivelDeJuego(newNvJuego);
                 user.setPreferencia(newPreferencia);
+                //Actulizar usuario logeado
                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
             }
         },new Response.ErrorListener(){
