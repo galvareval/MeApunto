@@ -38,7 +38,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         //uper.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_edit_profile);
         EditText etFirstName, etLastName, etEmail, etContactNo, etDec, etDni, etAddres, et_oPsw, etNpsw;
-        TextView txt_spin_gen;
+        TextView tvTxt_spin_gen;
         Spinner sp;
         Button btnUpdate;
         String usuario;
@@ -66,7 +66,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         etDec.setText(user.getDescripcion());
         etDni.setText(user.getDNI());
         etAddres.setText(user.getDireccion());
-        txt_spin_gen.setText(user.getGenero());
+        genero = user.getGenero();
+        tvTxt_spin_gen.setText(genero);
+        Log.d("myTag", "genero: "+ genero);
         btnUpdate=(Button) findViewById(R.id.bt_register);
         listaG.add("Hombre");
         listaG.add("Mujer");
@@ -99,7 +101,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         etNpsw = findViewById(R.id.et_nPsw);
         et_oPsw = findViewById(R.id.et_oPsw);
         sp = findViewById(R.id.spiner);
-        txt_spin_gen = (TextView)findViewById (R.id.txt_spin_gen);
+        tvTxt_spin_gen = findViewById (R.id.txt_spin_gen);
         // To show back button in actionbar
         //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
@@ -107,10 +109,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
     private void addLista()
     {
         sp.setOnItemSelectedListener(this);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, listaG);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaG);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(adapter);
-        sp.setSelection(0);
     }
     //
     @Override
@@ -121,11 +122,15 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
             case R.id.spiner:
                 {
-                    Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                    txt_spin_gen.setText(adapterView.getSelectedItem().toString());
-                    genero = adapterView.getSelectedItem().toString();
+                    if(!genero.equals(adapterView.getSelectedItem().toString()))
+                    {
+                        Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                        tvTxt_spin_gen.setText(adapterView.getSelectedItem().toString());
+                        genero = adapterView.getSelectedItem().toString();
+                    }
+                    break;
                 }
-                break;
+
             default:
                 break;
         }

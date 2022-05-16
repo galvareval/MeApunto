@@ -9,7 +9,7 @@ public enum Genero
             return valueOf(myEnumString);
         } catch (Exception ex) {
             // For error cases
-            return HOMBRE;
+            return MUJER;
         }
     }
 }
