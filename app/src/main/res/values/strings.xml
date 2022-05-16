@@ -35,6 +35,7 @@
     <string name="reservar">Reservar</string>
     <string name="editar_perfil">Editar Perfil</string>
     <string name="Select_gender">Select gender</string>
+    <string name="Select_level">Select level</string>
 
 
 </resources>

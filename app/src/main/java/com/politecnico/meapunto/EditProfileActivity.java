@@ -1,6 +1,5 @@
 package com.politecnico.meapunto;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -30,7 +29,7 @@ import com.politecnico.meapunto.modelos.Usuario;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
 import android.util.Log;
 
 public class EditProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -38,15 +37,17 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         //uper.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_edit_profile);
         EditText etFirstName, etLastName, etEmail, etContactNo, etDec, etDni, etAddres, et_oPsw, etNpsw;
-        TextView tvTxt_spin_gen;
-        Spinner sp;
+        TextView tvTxt_spin_gen, tvTxt_spin_nv;
+        Spinner sp_gener, sp_nv_juego;
         Button btnUpdate;
         String usuario;
         String psw;
         Usuario user;
         ArrayList<String> listaG = new ArrayList<String>();
+        ArrayList<String> listaL = new ArrayList<String>();
         Context cont=this;
         String genero;
+        String nivel;
     final int MIN_PASSWORD_LENGTH = 6;
 
     @Override
@@ -67,13 +68,20 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         etDni.setText(user.getDNI());
         etAddres.setText(user.getDireccion());
         genero = user.getGenero();
+        nivel = user.getNivelDeJuego();
         tvTxt_spin_gen.setText(genero);
+        tvTxt_spin_nv.setText(nivel);
         Log.d("myTag", "genero: "+ genero);
         btnUpdate=(Button) findViewById(R.id.bt_register);
         listaG.add("Hombre");
         listaG.add("Mujer");
-        addLista();
-
+        listaL.add("Iniciacion");
+        listaL.add("Intermedio");
+        listaL.add("Avanzado");
+        listaL.add("Competicion");
+        listaL.add("Profesional");
+        addListaG();
+        addListaL();
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,19 +108,30 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         etAddres = findViewById(R.id.et_addres);
         etNpsw = findViewById(R.id.et_nPsw);
         et_oPsw = findViewById(R.id.et_oPsw);
-        sp = findViewById(R.id.spiner);
+        sp_gener = findViewById(R.id.spiner);
+        sp_nv_juego = findViewById(R.id.spiner_nv_juego);
         tvTxt_spin_gen = findViewById (R.id.txt_spin_gen);
+        tvTxt_spin_nv = findViewById (R.id.txt_spin_nv_juego_din);
         // To show back button in actionbar
         //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
     // spin
-    private void addLista()
+    private void addListaG()
     {
-        sp.setOnItemSelectedListener(this);
+        sp_gener.setOnItemSelectedListener(this);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaG);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp.setAdapter(adapter);
+        sp_gener.setAdapter(adapter);
     }
+
+    private void addListaL()
+    {
+        sp_nv_juego.setOnItemSelectedListener(this);
+        ArrayAdapter<String> adapterL = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaL);
+        adapterL.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_nv_juego.setAdapter(adapterL);
+    }
+
     //
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -125,12 +144,23 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                     if(!genero.equals(adapterView.getSelectedItem().toString()))
                     {
                         Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                        tvTxt_spin_gen.setText(adapterView.getSelectedItem().toString());
                         genero = adapterView.getSelectedItem().toString();
-                    }
-                    break;
-                }
+                        tvTxt_spin_gen.setText(genero);
 
+                    }
+                }
+                break;
+            case R.id.spiner_nv_juego:
+                {
+                    if(!nivel.equals(adapterView.getSelectedItem().toString()))
+                    {
+                        Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                        nivel = adapterView.getSelectedItem().toString();
+                        tvTxt_spin_nv.setText(nivel);
+
+                    }
+                }
+                break;
             default:
                 break;
         }
