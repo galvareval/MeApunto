@@ -34,22 +34,25 @@ import android.util.Log;
 
 public class EditProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-        //uper.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_edit_profile);
+
         EditText etFirstName, etLastName, etEmail, etContactNo, etDec, etDni, etAddres, et_oPsw, etNpsw;
         TextView tvTxt_spin_gen, tvTxt_spin_nv, tvTxt_spin_prefer;
         Spinner sp_gener, sp_nv_juego, sp_preferencia;
         Button btnUpdate;
+
         String usuario;
         String psw;
         Usuario user;
-        ArrayList<String> listaG = new ArrayList<String>();
-        ArrayList<String> listaL = new ArrayList<String>();
-        ArrayList<String> listaP = new ArrayList<String>();
-        Context cont=this;
         String genero;
         String nivel;
         String preferencia;
+
+        ArrayList<String> listaG = new ArrayList<String>();
+        ArrayList<String> listaL = new ArrayList<String>();
+        ArrayList<String> listaP = new ArrayList<String>();
+
+        Context cont=this;
+
     final int MIN_PASSWORD_LENGTH = 6;
 
     @Override
@@ -115,7 +118,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
     }
 
-    void viewInitializations() {
+    public void viewInitializations() {
         etFirstName = findViewById(R.id.et_first_name);
         etLastName = findViewById(R.id.et_last_name);
         etEmail = findViewById(R.id.et_email);
@@ -133,8 +136,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         tvTxt_spin_gen = findViewById (R.id.txt_spin_gen);
         tvTxt_spin_nv = findViewById (R.id.txt_spin_nv_juego_din);
         tvTxt_spin_prefer = findViewById(R.id.txt_spin_preferencia_din);
-        // To show back button in actionbar
-        //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
     }
     // spin
     private void addListaG()
@@ -143,7 +145,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaG);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_gener.setAdapter(adapter);
-        sp_gener.setSelection(0);
+        //p_gener.setSelection(0);
 
     }
 
@@ -153,6 +155,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayAdapter<String> adapterL = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaL);
         adapterL.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_nv_juego.setAdapter(adapterL);
+        //sp_nv_juego.setSelection(0);
     }
 
     private void addListaP()
@@ -161,6 +164,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayAdapter<String> adapterP = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaP);
         adapterP.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_preferencia.setAdapter(adapterP);
+        //sp_preferencia.setSelection(0);
     }
 
     //
@@ -174,7 +178,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 {
                     if(!genero.equals(adapterView.getSelectedItem().toString()))
                     {
-                        Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                         genero = adapterView.getSelectedItem().toString();
                         tvTxt_spin_gen.setText(genero);
 
@@ -185,7 +190,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 {
                     if(!nivel.equals(adapterView.getSelectedItem().toString()))
                     {
-                        Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                         nivel = adapterView.getSelectedItem().toString();
                         tvTxt_spin_nv.setText(nivel);
 
@@ -196,7 +202,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
             {
                 if(!preferencia.equals(adapterView.getSelectedItem().toString()))
                 {
-                    Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+
+                    //Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                     preferencia = adapterView.getSelectedItem().toString();
                     tvTxt_spin_prefer.setText(preferencia);
 
