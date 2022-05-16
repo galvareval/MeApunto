@@ -46,6 +46,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         Usuario user;
         ArrayList<String> listaG = new ArrayList<String>();
         Context cont=this;
+        String genero;
     final int MIN_PASSWORD_LENGTH = 6;
 
     @Override
@@ -122,8 +123,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 {
                     Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                     txt_spin_gen.setText(adapterView.getSelectedItem().toString());
-                    break;
+                    genero = adapterView.getSelectedItem().toString();
                 }
+                break;
             default:
                 break;
         }
@@ -216,6 +218,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         String addres = etAddres.getText().toString();
         String dni = etDni.getText().toString();
         String newPsw = psw;
+        String newGen = genero;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,new Response.Listener<String>() {
             @Override
@@ -229,6 +232,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 user.setDireccion(addres);
                 user.setDNI(dni);
                 user.setContraseña(newPsw);
+                user.setGenero(newGen);
                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
             }
         },new Response.ErrorListener(){
@@ -247,6 +251,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 parametros.put("correo",email);
                 Log.d("myTag", "correo"+ parametros.get("correo"));
                 parametros.put("telefono",contactNo);
+                parametros.put("genero",newGen);
                 parametros.put("descripcion",Designation);
                 parametros.put("direccion",addres);
                 parametros.put("contraseña",newPsw);
