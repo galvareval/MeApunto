@@ -281,6 +281,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:textColorHint="#808080"
+                app:layout_constraintBottom_toTopOf="@+id/layout_spiner"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_psw"
@@ -301,6 +302,53 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_spiner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textColorHint="#808080"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_nPsw"
+                app:layout_constraintWidth_percent="0.7">
+                <TextView
+                    android:id="@+id/txt_gen"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
+                    android:background="#DCE9AA74"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/Select_gender"
+                    android:textStyle="italic"
+                    android:visibility="visible"
+                    app:autoSizeTextType="none"
+                    app:fontFamily="serif"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <Spinner
+                    android:id="@+id/spiner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:prompt="@string/Select_gender"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintStart_toEndOf="@+id/txt_gen" />
+
+                <TextView
+                    android:id="@+id/txt_spin_gen"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Gender"
+                    android:textSize="20sp"
+                     />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/bt_register"
                 style="?android:attr/borderlessButtonStyle"
@@ -316,7 +364,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.512"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_nPsw"
+                app:layout_constraintTop_toBottomOf="@+id/layout_spiner"
                 app:layout_constraintWidth_percent="0.7"
                 />
 

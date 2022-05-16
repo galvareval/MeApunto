@@ -3,12 +3,17 @@ package com.politecnico.meapunto;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,20 +27,25 @@ import com.politecnico.meapunto.modelos.SharedPrefManager;
 import com.politecnico.meapunto.modelos.URLs;
 import com.politecnico.meapunto.modelos.Usuario;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import android.util.Log;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
         //uper.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_edit_profile);
         EditText etFirstName, etLastName, etEmail, etContactNo, etDec, etDni, etAddres, et_oPsw, etNpsw;
+        TextView txt_spin_gen;
+        Spinner sp;
         Button btnUpdate;
         String usuario;
         String psw;
         Usuario user;
+        ArrayList<String> listaG = new ArrayList<String>();
+        Context cont=this;
     final int MIN_PASSWORD_LENGTH = 6;
 
     @Override
@@ -55,7 +65,11 @@ public class EditProfileActivity extends AppCompatActivity {
         etDec.setText(user.getDescripcion());
         etDni.setText(user.getDNI());
         etAddres.setText(user.getDireccion());
+        txt_spin_gen.setText(user.getGenero());
         btnUpdate=(Button) findViewById(R.id.bt_register);
+        listaG.add("Hombre");
+        listaG.add("Mujer");
+        addLista();
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +97,42 @@ public class EditProfileActivity extends AppCompatActivity {
         etAddres = findViewById(R.id.et_addres);
         etNpsw = findViewById(R.id.et_nPsw);
         et_oPsw = findViewById(R.id.et_oPsw);
+        sp = findViewById(R.id.spiner);
+        txt_spin_gen = (TextView)findViewById (R.id.txt_spin_gen);
         // To show back button in actionbar
         //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+    // spin
+    private void addLista()
+    {
+        sp.setOnItemSelectedListener(this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, listaG);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp.setAdapter(adapter);
+        sp.setSelection(0);
+    }
+    //
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        adapterView.getSelectedItem();
+        switch (adapterView.getId())
+        {
+
+            case R.id.spiner:
+                {
+                    Toast.makeText(cont, adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                    txt_spin_gen.setText(adapterView.getSelectedItem().toString());
+                    break;
+                }
+            default:
+                break;
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     // Checking if the input in form is valid

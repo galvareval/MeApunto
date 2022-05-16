@@ -34,6 +34,7 @@
     <string name="jugar">Jugar</string>
     <string name="reservar">Reservar</string>
     <string name="editar_perfil">Editar Perfil</string>
+    <string name="Select_gender">Select gender</string>
 
 
 </resources>
