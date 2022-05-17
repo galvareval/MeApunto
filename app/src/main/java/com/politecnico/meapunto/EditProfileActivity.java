@@ -38,30 +38,30 @@ import android.util.Log;
 public class EditProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
 
-        EditText etFirstName, etLastName, etEmail, etContactNo, etDec, etDni, etAddres, et_oPsw, etNpsw;
-        TextView tvTxt_spin_gen, tvTxt_spin_nv, tvTxt_spin_prefer, tvTxt_spin_activo, tvTxt_fecha;
-        Spinner sp_gener, sp_nv_juego, sp_preferencia, sp_activo;
-        Button btnUpdate, updateFecha;
+        private EditText etFirstName, etLastName, etEmail, etContactNo, etDec, etDni, etAddres, et_oPsw, etNpsw;
+        private TextView tvTxt_spin_gen, tvTxt_spin_nv, tvTxt_spin_prefer, tvTxt_spin_activo, tvTxt_fecha;
+        private Spinner sp_gener, sp_nv_juego, sp_preferencia, sp_activo;
+        private Button btnUpdate, updateFecha;
 
-        String usuario;
-        String psw;
-        Usuario user;
-        String genero;
-        String nivel;
-        String preferencia;
-        String status;
-        String fechaNac;
+        private String usuario;
+        private String psw;
+        private Usuario user;
+        private String genero;
+        private String nivel;
+        private String preferencia;
+        private String status;
+        private String fechaNac;
 
-        ArrayList<String> listaG = new ArrayList<String>();
-        ArrayList<String> listaL = new ArrayList<String>();
-        ArrayList<String> listaP = new ArrayList<String>();
-        ArrayList<String> listaA = new ArrayList<String>();
+        private ArrayList<String> listaG = new ArrayList<String>();
+        private ArrayList<String> listaL = new ArrayList<String>();
+        private ArrayList<String> listaP = new ArrayList<String>();
+        private ArrayList<String> listaA = new ArrayList<String>();
 
         private Calendar c;
         private DatePickerDialog dpd;
 
 
-    final int MIN_PASSWORD_LENGTH = 6;
+    //final int MIN_PASSWORD_LENGTH = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
