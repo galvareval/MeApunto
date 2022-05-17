@@ -128,7 +128,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 }
             }
         });
-
+        // Escucha para el boton de setear fecha
         updateFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
