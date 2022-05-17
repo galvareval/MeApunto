@@ -34,10 +34,11 @@
     <string name="jugar">Jugar</string>
     <string name="reservar">Reservar</string>
     <string name="editar_perfil">Editar Perfil</string>
-    <string name="Select_gender">Select gender</string>
-    <string name="Select_level">Select level</string>
-    <string name="Select_preferencia">Select preferencia</string>
-    <string name="Select_status">Select status</string>
+    <string name="Select_gender">Update gender</string>
+    <string name="Select_level">Update level</string>
+    <string name="Select_preferencia">Update preferencia</string>
+    <string name="Select_status">Update status</string>
+    <string name="Update_fecha">Update Birthdate</string>
 
 
 </resources>

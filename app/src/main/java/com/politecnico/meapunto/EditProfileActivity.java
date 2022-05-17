@@ -36,9 +36,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
 
 
         EditText etFirstName, etLastName, etEmail, etContactNo, etDec, etDni, etAddres, et_oPsw, etNpsw;
-        TextView tvTxt_spin_gen, tvTxt_spin_nv, tvTxt_spin_prefer, tvTxt_spin_activo;
+        TextView tvTxt_spin_gen, tvTxt_spin_nv, tvTxt_spin_prefer, tvTxt_spin_activo, tvTxt_fecha;
         Spinner sp_gener, sp_nv_juego, sp_preferencia, sp_activo;
-        Button btnUpdate;
+        Button btnUpdate, updateFecha;
 
         String usuario;
         String psw;
@@ -47,6 +47,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         String nivel;
         String preferencia;
         String status;
+        String fechaNac;
 
         ArrayList<String> listaG = new ArrayList<String>();
         ArrayList<String> listaL = new ArrayList<String>();
@@ -77,15 +78,18 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         genero = user.getGenero();
         nivel = user.getNivelDeJuego();
         preferencia = user.getPreferencia();
+        fechaNac = user.getFecha_nacimiento();
         //status = user.getActivo();//Falta get de status
 
         tvTxt_spin_gen.setText(genero);
         tvTxt_spin_nv.setText(nivel);
         tvTxt_spin_prefer.setText(preferencia);
+        tvTxt_fecha.setText(fechaNac);
         //tvTxt_spin_activo.setText(status);// Falta get de status?¿
 
         Log.d("myTag", "genero: "+ genero);
         Log.d("myTag", "preferencia: "+ preferencia);
+        Log.d("myTag", "fecha: "+ fechaNac);
         btnUpdate=(Button) findViewById(R.id.bt_register);
 
         listaG.add("Hombre");
@@ -144,6 +148,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         tvTxt_spin_nv = findViewById (R.id.txt_spin_nv_juego_din);
         tvTxt_spin_prefer = findViewById(R.id.txt_spin_preferencia_din);
         tvTxt_spin_activo = findViewById(R.id.txt_spin_activo_din);
+        tvTxt_fecha = findViewById(R.id.txt_fecha_nac_din);
+
+        updateFecha = findViewById(R.id.bt_update_fecha);
 
     }
 

@@ -514,6 +514,58 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_fecha_nac"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textColorHint="#808080"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_spiner_activo"
+                app:layout_constraintWidth_percent="0.7">
+                <TextView
+                    android:id="@+id/txt_fecha_nac"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
+                    android:background="#DCE9AA74"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/Update_fecha"
+                    android:textStyle="italic"
+                    android:visibility="visible"
+                    app:autoSizeTextType="none"
+                    app:fontFamily="serif"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <Button
+                    android:id="@+id/bt_update_fecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/elegirFecha"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_fecha_nac_din"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:visibility="visible"
+                    android:background="#DCE9AA74"
+                    android:text="@string/Update_fecha"
+                    android:textSize="20sp"
+                    tools:visibility="visible"
+                    android:textStyle="italic"
+                    app:autoSizeTextType="none"
+                    app:fontFamily="serif"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/bt_register"
                 style="?android:attr/borderlessButtonStyle"
@@ -529,7 +581,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.512"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_spiner_activo"
+                app:layout_constraintTop_toBottomOf="@+id/layout_fecha_nac"
                 app:layout_constraintWidth_percent="0.7"
                 />
 
