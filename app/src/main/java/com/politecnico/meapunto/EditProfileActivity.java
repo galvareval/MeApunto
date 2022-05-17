@@ -2,6 +2,7 @@ package com.politecnico.meapunto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import com.politecnico.meapunto.modelos.URLs;
 import com.politecnico.meapunto.modelos.Usuario;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +56,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         ArrayList<String> listaL = new ArrayList<String>();
         ArrayList<String> listaP = new ArrayList<String>();
         ArrayList<String> listaA = new ArrayList<String>();
+
+        private Calendar c;
+        private DatePickerDialog dpd;
 
 
     final int MIN_PASSWORD_LENGTH = 6;
@@ -120,6 +126,26 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                     updateDatos(URLs.URL_UPDATE_USER);
                     startActivity(new Intent(getApplicationContext(), MenuPrincipal.class));
                 }
+            }
+        });
+
+        updateFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                c = Calendar.getInstance();
+                final int day = c.get(Calendar.DAY_OF_MONTH);
+                int month = c.get(Calendar.MONTH);
+                int year = c.get(Calendar.YEAR);
+
+                dpd = new DatePickerDialog(EditProfileActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        fechaNac = year + "-" + (month + 1) + "-" + dayOfMonth;
+                        tvTxt_fecha.setText(fechaNac);
+                    }
+                }, day, month, year);
+                dpd.show();
             }
         });
 
@@ -368,6 +394,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         String newGen = genero;
         String newNvJuego = nivel;
         String newPreferencia = preferencia;
+        String newFecha = fechaNac;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,new Response.Listener<String>() {
             @Override
@@ -384,6 +411,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 user.setGenero(newGen);
                 user.setNivelDeJuego(newNvJuego);
                 user.setPreferencia(newPreferencia);
+                user.setFecha_nacimiento(newFecha);
                 //Actulizar usuario logeado
                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
             }
@@ -407,6 +435,7 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                 Log.d("myTag", "preferenciaphp: "+ parametros.get("preferencia"));
                 parametros.put("telefono",contactNo);
                 parametros.put("genero",newGen);
+                parametros.put("fecha_nacimiento",newFecha);
                 parametros.put("descripcion",Designation);
                 parametros.put("direccion",addres);
                 parametros.put("contraseña",newPsw);
